@@ -527,7 +527,33 @@ return false;
 
   gtag('config', 'G-V9F5ND3PCS');
 </script>
+      // 檢查當前時間是否在設定的開放時間內
+        function checkTime() {
+            const openDate = new Date('2024-07-10'); // 設定開放日期
+            const closeDate = new Date('2024-07-20'); // 設定關閉日期
+            const openTime = '08:00'; // 設定開放時間
+            const closeTime = '18:00'; // 設定關閉時間
+            const message = document.getElementById('message');
 
+            const now = new Date();
+            const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const currentTime = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+
+            if (currentDate >= openDate && currentDate <= closeDate && currentTime >= openTime && currentTime <= closeTime) {
+                message.textContent = ''; // 清空提示訊息
+                document.getElementById('scoreForm').style.display = 'block'; // 顯示表單
+            } else {
+                message.textContent = '系統未在開放時間內。';
+                document.getElementById('scoreForm').style.display = 'none'; // 隱藏表單
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 顯示免責聲明模態框
+            document.getElementById('disclaimerModal').style.display = 'block';
+            checkTime();
+        });
+    </script>
     </div>
 </body>
 </html>
